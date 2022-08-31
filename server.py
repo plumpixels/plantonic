@@ -26,7 +26,3 @@ def post():
         return jsonify({"error": "Wrong format", "reading": data})
     wk.append_row(reading)
     return jsonify({"status": "successful"})
-
-
-if (__name__ == "__main__"):
-    app.run(debug=True)
