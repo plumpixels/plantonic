@@ -18,7 +18,8 @@ acc = authorize(creds)
 sh = acc.open("Plantonic-Sensor-Data")
 wk = sh.worksheet('temp-hum')
 
-token = os.getenv("DATA_PASS")
+token = os.getenv("DATA_PASS") if os.getenv(
+    "DATA_PASS") != None else "Bearer Test"
 
 
 @app.route("/")
