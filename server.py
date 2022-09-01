@@ -21,6 +21,8 @@ wk = sh.worksheet('temp-hum')
 token = os.getenv("DATA_PASS") if os.getenv(
     "DATA_PASS") != None else "Bearer Test"
 
+print(token, os.getenv("DATA_PASS"))
+
 
 @app.route("/")
 def home():
