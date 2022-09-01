@@ -18,6 +18,8 @@ acc = authorize(creds)
 sh = acc.open("Plantonic-Sensor-Data")
 wk = sh.worksheet('temp-hum')
 
+token = os.getenv("DATA_PASS")
+
 
 @app.route("/")
 def home():
@@ -29,6 +31,9 @@ def post():
     if (request.method == "GET"):
         data = wk.get("A2:C100")
         return render_template("data.html", data=data)
+    auth = request.headers.get("Authorization")
+    if (auth.split()[1] != token):
+        return jsonify({"error": "Invalid Auth Token", "token": auth})
     data = request.get_json()
     print(data)
     reading = [data.get("time"), data.get("temperature"), data.get("humidity")]
